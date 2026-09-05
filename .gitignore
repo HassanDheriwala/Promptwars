@@ -1,6 +1,6 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
-# dependencies
+# =======================================================
+# Dependencies & Package Managers
+# =======================================================
 /node_modules
 /.pnp
 .pnp.*
@@ -10,33 +10,102 @@
 !.yarn/releases
 !.yarn/versions
 
-# testing
-/coverage
-
-# next.js
+# =======================================================
+# Next.js Build Outputs & Caches
+# =======================================================
 /.next/
 /out/
+/build/
+/dist/
+.turbo/
+.cache/
+*.tsbuildinfo
+next-env.d.ts
+.eslintcache
 
-# production
-/build
+# =======================================================
+# Testing & Coverage
+# =======================================================
+/coverage/
+/.nyc_output/
 
-# misc
-.DS_Store
-*.pem
-
-# debug
+# =======================================================
+# Logs & Debugging
+# =======================================================
+*.log
+*.log*
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files
-.env*
+# =======================================================
+# Environment & Secret Files (Keep repo safe)
+# =======================================================
+.env
+.env.*
+.env*.local
 !.env.example
 
-# vercel
+# =======================================================
+# Cloud & Hosting Providers
+# =======================================================
 .vercel
+.netlify
 
-# typescript
-*.tsbuildinfo
-next-env.d.ts
+# =======================================================
+# System & Editor Files
+# =======================================================
+.DS_Store
+Thumbs.db
+*.pem
+.idea/
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+*.swp
+*.swo
+
+# =======================================================
+# Strict Repository Size Guards (< 10 MB limit enforcement)
+# Exclude large datasets, video/audio media, weights, and binaries
+# =======================================================
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.rar
+*.7z
+*.iso
+*.bin
+*.exe
+*.dll
+*.dylib
+*.so
+
+# Large media files
+*.mp4
+*.mov
+*.avi
+*.mkv
+*.webm
+*.wav
+*.mp3
+
+# Model weights & large datasets
+*.onnx
+*.pt
+*.pth
+*.h5
+*.pkl
+*.pickle
+*.parquet
+*.csv
+*.sqlite
+*.sqlite3
+*.db
+
+# Temporary scratch scripts & files
+*.tmp
+*.temp
+/scratch/
