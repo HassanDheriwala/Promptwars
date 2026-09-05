@@ -2,6 +2,7 @@
 
 import React from "react";
 import { Sparkles, ShieldCheck, Zap } from "lucide-react";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 interface HeaderProps {
   isDemoMode: boolean;
@@ -10,8 +11,8 @@ interface HeaderProps {
 
 export function Header({ isDemoMode, onApplyPreset }: HeaderProps) {
   return (
-    <header className="border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-md sticky top-0 z-30">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+    <header className="border-b border-slate-800/80 bg-background/80 backdrop-blur-md sticky top-0 z-30">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between bg-background text-foreground">
         {/* Logo & Brand */}
         <div className="flex items-center space-x-3">
           <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 via-blue-600 to-cyan-400 flex items-center justify-center shadow-lg shadow-indigo-500/20 ring-1 ring-white/20">
@@ -91,6 +92,7 @@ export function Header({ isDemoMode, onApplyPreset }: HeaderProps) {
             />
             <span>{isDemoMode ? "Curated Mode" : "Gemini AI Live"}</span>
           </div>
+          <ThemeToggle />
 
           {/* Production Safe Badge */}
           <div className="hidden sm:flex items-center space-x-1 text-xs text-slate-400 bg-slate-900/60 border border-slate-800/80 px-2.5 py-1 rounded-full">
