@@ -75,6 +75,19 @@ export const riskChallengeSchema = z.object({
   mitigation: z.string().min(1),
 });
 
+export const projectEvaluationSchema = z.object({
+  feasibilityScore: z.coerce.number().int().min(1, "Feasibility score must be at least 1").max(100, "Feasibility score cannot exceed 100"),
+  skillFitScore: z.coerce.number().int().min(1, "Skill fit score must be at least 1").max(100, "Skill fit score cannot exceed 100"),
+  timeFeasibilityScore: z.coerce.number().int().min(1, "Time feasibility score must be at least 1").max(100, "Time feasibility score cannot exceed 100"),
+  resourceFeasibilityScore: z.coerce.number().int().min(1, "Resource feasibility score must be at least 1").max(100, "Resource feasibility score cannot exceed 100"),
+  innovationScore: z.coerce.number().int().min(1, "Innovation score must be at least 1").max(100, "Innovation score cannot exceed 100"),
+  impactScore: z.coerce.number().int().min(1, "Impact score must be at least 1").max(100, "Impact score cannot exceed 100"),
+  whyThisWorks: z.string().min(1, "Why this works explanation is required").max(600),
+  keyRisks: z.array(z.string().min(1)).min(1, "At least one key risk is required"),
+  riskMitigations: z.array(z.string().min(1)).min(1, "At least one risk mitigation is required"),
+  differentiationSuggestions: z.array(z.string().min(1)).min(1, "At least one differentiation suggestion is required"),
+});
+
 export const projectBlueprintSchema = z.object({
   id: z.string().default(() => `proj-${Date.now()}-${Math.random().toString(36).substring(2, 7)}`),
   title: z.string().min(1).max(150),
@@ -93,6 +106,7 @@ export const projectBlueprintSchema = z.object({
   futureScope: z.array(z.string()).default([]),
   risksAndChallenges: z.array(riskChallengeSchema).min(1),
   architectureOverview: z.string().default("Client-Server architecture with modular services."),
+  evaluation: projectEvaluationSchema,
 });
 
 export const geminiProjectsOutputSchema = z.object({

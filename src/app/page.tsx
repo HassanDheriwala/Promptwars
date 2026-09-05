@@ -151,20 +151,19 @@ export default function HomePage() {
         <section className="text-center max-w-3xl mx-auto space-y-4">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-950/80 border border-indigo-800/80 text-indigo-300 text-xs font-semibold tracking-wide uppercase">
             <GraduationCap className="w-4 h-4 text-indigo-400" />
-            <span>Final-Year Capstone Architect</span>
+            <span>Project Feasibility & Innovation Engine</span>
           </div>
 
           <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white leading-tight">
             Turn your skills and interests into a{" "}
             <span className="bg-gradient-to-r from-indigo-400 via-blue-400 to-cyan-300 bg-clip-text text-transparent">
-              project you can actually build.
+              feasible, high-impact project.
             </span>
           </h1>
 
           <p className="text-sm sm:text-base text-slate-400 leading-relaxed max-w-2xl mx-auto">
-            Stop guessing your final-year project. Generate production-quality capstone blueprints
-            complete with realistic architectures, 3-week proof-of-concept milestones, and phased
-            development roadmaps.
+            Stop guessing your final-year project viability. Generate production-caliber capstone blueprints
+            backed by AI Reality Checks, numerical feasibility scores, concrete 3-week MVP milestones, and phased roadmaps.
           </p>
 
           {/* Quick Preset Selector */}

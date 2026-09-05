@@ -83,6 +83,19 @@ export interface RiskChallenge {
   mitigation: string;
 }
 
+export interface ProjectEvaluation {
+  feasibilityScore: number;
+  skillFitScore: number;
+  timeFeasibilityScore: number;
+  resourceFeasibilityScore: number;
+  innovationScore: number;
+  impactScore: number;
+  whyThisWorks: string;
+  keyRisks: string[];
+  riskMitigations: string[];
+  differentiationSuggestions: string[];
+}
+
 export interface ProjectBlueprint {
   id: string;
   title: string;
@@ -101,6 +114,7 @@ export interface ProjectBlueprint {
   futureScope: string[];
   risksAndChallenges: RiskChallenge[];
   architectureOverview: string;
+  evaluation: ProjectEvaluation;
 }
 
 export interface GenerateIdeasResponse {

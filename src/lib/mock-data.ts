@@ -64,7 +64,7 @@ export const CURATED_PROJECT_BLUEPRINTS: ProjectBlueprint[] = [
       keyFeatures: [
         "Manual and sample prescription input",
         "Deterministic contraindication lookup engine",
-        "Severity severity scoring (Mild, Moderate, Critical)",
+        "Severity scoring (Mild, Moderate, Critical)",
       ],
       buildTimelineWeeks: 3,
       deliverable: "Live web application with 50 common cardiovascular and antibiotic drug interaction test cases.",
@@ -134,6 +134,28 @@ export const CURATED_PROJECT_BLUEPRINTS: ProjectBlueprint[] = [
     ],
     architectureOverview:
       "Next.js frontend connects via secure server actions to FastAPI microservice. BioBERT extracts drug tokens which are resolved against a cached PostgreSQL relation of verified drug-drug interaction pairs.",
+    evaluation: {
+      feasibilityScore: 91,
+      skillFitScore: 95,
+      timeFeasibilityScore: 88,
+      resourceFeasibilityScore: 92,
+      innovationScore: 86,
+      impactScore: 96,
+      whyThisWorks:
+        "Leverages open-source FDA/NIH drug interaction graphs with specialized medical NLP, isolating clinical logic from UI to deliver an immediate, testable safety prototype within 12 weeks.",
+      keyRisks: [
+        "Clinical entity extraction inaccuracy on non-standard medical shorthand",
+        "High query latency when traversing deep multi-drug interaction graphs",
+      ],
+      riskMitigations: [
+        "Ground extraction with strict confidence thresholding and deterministic RxNorm drug dictionary lookup",
+        "Pre-compute and cache bipartite interaction graphs in indexed PostgreSQL tables",
+      ],
+      differentiationSuggestions: [
+        "Add explainable counterfactuals showing why an alternative molecule is safer for specific renal/liver profiles",
+        "Integrate real-time adverse event signal detection from FDA FAERS historical quarterly dumps",
+      ],
+    },
   },
   {
     id: "proj-curated-fintech-02",
@@ -268,6 +290,28 @@ export const CURATED_PROJECT_BLUEPRINTS: ProjectBlueprint[] = [
     ],
     architectureOverview:
       "Next.js frontend manages CSV upload and client visualization. A Python analytics worker computes cash-flow statistics, executes model inference with SHAP, and returns structured risk indicators.",
+    evaluation: {
+      feasibilityScore: 93,
+      skillFitScore: 94,
+      timeFeasibilityScore: 90,
+      resourceFeasibilityScore: 91,
+      innovationScore: 88,
+      impactScore: 94,
+      whyThisWorks:
+        "Combines standard gradient boosting with TreeSHAP to produce transparent credit decisions on CSV cash-flow logs without needing formal banking bureau infrastructure.",
+      keyRisks: [
+        "Feature sparsity from informal merchants with irregular, cash-heavy receipts",
+        "Model overconfidence on seasonal revenue spikes",
+      ],
+      riskMitigations: [
+        "Incorporate rolling median windowing and debt-service ratio dampening to normalize erratic cash surges",
+        "Provide clear manual overrides and underwriter commentary fields for auditability",
+      ],
+      differentiationSuggestions: [
+        "Interactive visual waterfall chart explaining exactly which 3 actions will boost merchant approval odds",
+        "Micro-amortization daily revenue-share repayment simulator based on digital POS turnover",
+      ],
+    },
   },
   {
     id: "proj-curated-cybersecurity-03",
@@ -402,6 +446,28 @@ export const CURATED_PROJECT_BLUEPRINTS: ProjectBlueprint[] = [
     ],
     architectureOverview:
       "A reverse proxy filters HTTP traffic between clients and backend microservices. Traffic anomalies are logged to SQLite/Redis and streamed via Server-Sent Events to the Next.js control center.",
+    evaluation: {
+      feasibilityScore: 89,
+      skillFitScore: 92,
+      timeFeasibilityScore: 86,
+      resourceFeasibilityScore: 90,
+      innovationScore: 91,
+      impactScore: 95,
+      whyThisWorks:
+        "Employs an asynchronous non-blocking reverse proxy pattern to detect PII and leaked developer secrets in real time without introducing perceptible gateway latency.",
+      keyRisks: [
+        "Inline regex inspection causing latency bottlenecks on large payload responses",
+        "False positive masking of legitimate public business contact information",
+      ],
+      riskMitigations: [
+        "Execute synchronous checks with high-speed deterministic regex while offloading heavy transformer NER to async workers",
+        "Provide granular per-endpoint masking policies with strict regex boundary scoping",
+      ],
+      differentiationSuggestions: [
+        "Automated GitHub PR bot that submits exact controller remediation patches for detected PII leakage",
+        "Live visual compliance matrix mapping intercepted traffic to OWASP Top 10 and GDPR articles",
+      ],
+    },
   },
   {
     id: "proj-curated-edtech-04",
@@ -536,6 +602,28 @@ export const CURATED_PROJECT_BLUEPRINTS: ProjectBlueprint[] = [
     ],
     architectureOverview:
       "Next.js App Router renders a React Flow canvas. User responses update mastery states stored in PostgreSQL. Socratic hints are processed via server-side Gemini API calls.",
+    evaluation: {
+      feasibilityScore: 94,
+      skillFitScore: 96,
+      timeFeasibilityScore: 92,
+      resourceFeasibilityScore: 95,
+      innovationScore: 89,
+      impactScore: 92,
+      whyThisWorks:
+        "Transforms linear course curricula into a directed prerequisite graph where diagnostic micro-quizzes automatically pinpoint root-cause misunderstandings.",
+      keyRisks: [
+        "Graph complexity overwhelming beginner students during onboarding",
+        "LLM hints inadvertently revealing complete code answers",
+      ],
+      riskMitigations: [
+        "Implement progressive disclosure ('fog of war') that reveals only immediate prerequisite concepts",
+        "Use strict Socratic prompt guardrails that enforce guiding questions over direct code generation",
+      ],
+      differentiationSuggestions: [
+        "Interactive AST (Abstract Syntax Tree) visualizer highlighting logic flaws rather than syntax errors",
+        "Peer study-buddy matching based on complementary concept mastery profiles",
+      ],
+    },
   },
   {
     id: "proj-curated-climate-05",
@@ -670,6 +758,28 @@ export const CURATED_PROJECT_BLUEPRINTS: ProjectBlueprint[] = [
     ],
     architectureOverview:
       "Telemetry streams into TimescaleDB. A Python worker performs load disaggregation and forecasting. Next.js App Router displays real-time load analytics and actionable peak shaving advisories.",
+    evaluation: {
+      feasibilityScore: 88,
+      skillFitScore: 90,
+      timeFeasibilityScore: 85,
+      resourceFeasibilityScore: 89,
+      innovationScore: 92,
+      impactScore: 96,
+      whyThisWorks:
+        "Uses Non-Intrusive Load Monitoring (NILM) on aggregate power telemetry to isolate heavy subsystem consumers and predict optimal low-carbon operational windows.",
+      keyRisks: [
+        "Appliance signature overlapping in noisy commercial electrical environments",
+        "Telemetry data volume overwhelming standard relational storage",
+      ],
+      riskMitigations: [
+        "Combine 1D convolutional feature detection with temporal operational priors (e.g. office hours vs night baselines)",
+        "Implement TimescaleDB hypertables with automatic metric downsampling and compression",
+      ],
+      differentiationSuggestions: [
+        "Real-time campus peak-demand shaving advisor linked directly to grid carbon intensity APIs",
+        "Projected financial ROI and carbon credit equivalence calculator for university facility boards",
+      ],
+    },
   },
 ];
 
@@ -679,7 +789,7 @@ export const CURATED_PROJECT_BLUEPRINTS: ProjectBlueprint[] = [
 export function getCuratedBlueprintsForProfile(profile: StudentProfile): ProjectBlueprint[] {
   // Normalize domain matching
   const targetDomain = profile.domain.toLowerCase();
-  
+
   // Find closest matches
   const sorted = [...CURATED_PROJECT_BLUEPRINTS].sort((a, b) => {
     let scoreA = 0;
@@ -707,6 +817,25 @@ export function getCuratedBlueprintsForProfile(profile: StudentProfile): Project
 
   // Return top 3 tailored blueprints with dynamic adjustments for the student's constraints
   return sorted.slice(0, 3).map((bp, idx) => {
+    // Calculate dynamic skill fit based on profile overlap
+    const skillMatches = profile.skills.filter((skill) => {
+      const s = skill.toLowerCase();
+      const allTech = [...bp.techStack.frontend, ...bp.techStack.backend, ...bp.techStack.aiMl].join(" ").toLowerCase();
+      return allTech.includes(s);
+    }).length;
+    const skillFitScore = Math.min(98, Math.max(82, 85 + skillMatches * 4));
+
+    // Calculate time feasibility based on timeframe weeks
+    const timeFeasibilityScore = profile.timeframeWeeks >= 12 ? 92 : profile.timeframeWeeks >= 8 ? 88 : 80;
+
+    // Calculate resource feasibility based on team size
+    const resourceFeasibilityScore = profile.teamSize >= 2 ? 94 : 88;
+
+    // Overall feasibility score is a weighted composite
+    const feasibilityScore = Math.round(
+      skillFitScore * 0.4 + timeFeasibilityScore * 0.3 + resourceFeasibilityScore * 0.3
+    );
+
     return {
       ...bp,
       id: `curated-${profile.domain.toLowerCase().replace(/\s+/g, "-")}-${idx + 1}-${Date.now()}`,
@@ -719,6 +848,13 @@ export function getCuratedBlueprintsForProfile(profile: StudentProfile): Project
       mvpVersion: {
         ...bp.mvpVersion,
         buildTimelineWeeks: Math.max(2, Math.floor(profile.timeframeWeeks / 3)),
+      },
+      evaluation: {
+        ...bp.evaluation,
+        feasibilityScore,
+        skillFitScore,
+        timeFeasibilityScore,
+        resourceFeasibilityScore,
       },
     };
   });

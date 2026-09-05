@@ -24,11 +24,11 @@ export function Header({ isDemoMode, onApplyPreset }: HeaderProps) {
                 Capstone<span className="text-indigo-400">AI</span>
               </span>
               <span className="text-[10px] uppercase font-semibold px-2 py-0.5 rounded-full bg-indigo-950/80 text-indigo-300 border border-indigo-800/60">
-                MVP Architect
+                Feasibility & Innovation
               </span>
             </div>
             <p className="text-xs text-slate-400 hidden sm:block">
-              Final-Year Engineering Project Blueprint Engine
+              Project Feasibility & Innovation Engine
             </p>
           </div>
         </div>
@@ -44,28 +44,32 @@ export function Header({ isDemoMode, onApplyPreset }: HeaderProps) {
               <button
                 type="button"
                 onClick={() => onApplyPreset("Healthcare")}
-                className="px-2.5 py-1 rounded-md hover:bg-slate-800 text-slate-300 hover:text-white transition-colors"
+                className="px-2.5 py-1 rounded-md hover:bg-slate-800 text-slate-300 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
+                aria-label="Load Healthcare profile preset"
               >
                 Healthcare
               </button>
               <button
                 type="button"
                 onClick={() => onApplyPreset("FinTech")}
-                className="px-2.5 py-1 rounded-md hover:bg-slate-800 text-slate-300 hover:text-white transition-colors"
+                className="px-2.5 py-1 rounded-md hover:bg-slate-800 text-slate-300 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
+                aria-label="Load FinTech profile preset"
               >
                 FinTech
               </button>
               <button
                 type="button"
                 onClick={() => onApplyPreset("Cybersecurity")}
-                className="px-2.5 py-1 rounded-md hover:bg-slate-800 text-slate-300 hover:text-white transition-colors"
+                className="px-2.5 py-1 rounded-md hover:bg-slate-800 text-slate-300 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
+                aria-label="Load Security profile preset"
               >
                 Security
               </button>
               <button
                 type="button"
                 onClick={() => onApplyPreset("EdTech")}
-                className="px-2.5 py-1 rounded-md hover:bg-slate-800 text-slate-300 hover:text-white transition-colors"
+                className="px-2.5 py-1 rounded-md hover:bg-slate-800 text-slate-300 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
+                aria-label="Load EdTech profile preset"
               >
                 EdTech
               </button>
@@ -97,7 +101,7 @@ export function Header({ isDemoMode, onApplyPreset }: HeaderProps) {
           {/* Production Safe Badge */}
           <div className="hidden sm:flex items-center space-x-1 text-xs text-slate-400 bg-slate-900/60 border border-slate-800/80 px-2.5 py-1 rounded-full">
             <ShieldCheck className="w-3.5 h-3.5 text-indigo-400" />
-            <span>Secure MVP</span>
+            <span>Reality Checked</span>
           </div>
         </div>
       </div>

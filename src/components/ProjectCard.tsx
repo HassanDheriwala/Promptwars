@@ -9,6 +9,9 @@ import {
   ArrowRight,
   SlidersHorizontal,
   CheckCircle2,
+  ShieldCheck,
+  Lightbulb,
+  TrendingUp,
 } from "lucide-react";
 
 interface ProjectCardProps {
@@ -23,6 +26,8 @@ export function ProjectCard({ blueprint, onSelect, onRefine }: ProjectCardProps)
     Intermediate: "bg-blue-950/60 text-blue-300 border-blue-800/60",
     Advanced: "bg-purple-950/60 text-purple-300 border-purple-800/60",
   }[blueprint.difficulty] || "bg-slate-800 text-slate-300 border-slate-700";
+
+  const evalData = blueprint.evaluation;
 
   return (
     <div className="bg-slate-900/80 border border-slate-800 hover:border-indigo-500/50 rounded-2xl p-6 transition-all duration-300 flex flex-col justify-between hover:shadow-2xl hover:shadow-indigo-950/40 group">
@@ -55,6 +60,38 @@ export function ProjectCard({ blueprint, onSelect, onRefine }: ProjectCardProps)
         <p className="text-sm text-slate-300 mb-4 line-clamp-2 leading-relaxed">
           {blueprint.concept}
         </p>
+
+        {/* Reality Check Snapshot */}
+        {evalData && (
+          <div className="mb-4 p-3 bg-slate-950/80 border border-slate-800/80 rounded-xl space-y-2">
+            <div className="flex items-center justify-between">
+              <span className="text-[11px] font-bold text-slate-300 uppercase tracking-wider flex items-center gap-1">
+                <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" /> Reality Check
+              </span>
+              <span className="text-[11px] font-bold text-emerald-300 font-mono">
+                Feasibility: {evalData.feasibilityScore}/100
+              </span>
+            </div>
+            <div className="grid grid-cols-3 gap-1.5 text-center text-[10px]">
+              <div className="p-1.5 bg-slate-900/90 rounded-md border border-slate-800/70">
+                <span className="text-slate-400 block truncate">Skill Fit</span>
+                <span className="font-bold text-indigo-300">{evalData.skillFitScore}/100</span>
+              </div>
+              <div className="p-1.5 bg-slate-900/90 rounded-md border border-slate-800/70">
+                <span className="text-slate-400 block truncate flex items-center justify-center gap-0.5">
+                  <Lightbulb className="w-2.5 h-2.5 text-amber-400" /> Innov.
+                </span>
+                <span className="font-bold text-amber-300">{evalData.innovationScore}/100</span>
+              </div>
+              <div className="p-1.5 bg-slate-900/90 rounded-md border border-slate-800/70">
+                <span className="text-slate-400 block truncate flex items-center justify-center gap-0.5">
+                  <TrendingUp className="w-2.5 h-2.5 text-purple-400" /> Impact
+                </span>
+                <span className="font-bold text-purple-300">{evalData.impactScore}/100</span>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Suitability Callout */}
         <div className="mb-4 p-3 bg-slate-950/60 rounded-xl border border-slate-800/60 text-xs text-slate-300">
@@ -102,7 +139,8 @@ export function ProjectCard({ blueprint, onSelect, onRefine }: ProjectCardProps)
         <button
           type="button"
           onClick={() => onSelect(blueprint)}
-          className="flex-1 py-2.5 px-4 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-xs font-semibold flex items-center justify-center gap-1.5 shadow-md shadow-indigo-900/30 transition-all hover:scale-[1.02] active:scale-[0.98]"
+          className="flex-1 py-2.5 px-4 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-xs font-semibold flex items-center justify-center gap-1.5 shadow-md shadow-indigo-900/30 transition-all hover:scale-[1.02] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
+          aria-label={`View full blueprint for ${blueprint.title}`}
         >
           <FileText className="w-3.5 h-3.5" />
           <span>Full Blueprint</span>
@@ -112,8 +150,9 @@ export function ProjectCard({ blueprint, onSelect, onRefine }: ProjectCardProps)
         <button
           type="button"
           onClick={() => onRefine(blueprint)}
-          className="py-2.5 px-3.5 bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white rounded-xl text-xs font-medium flex items-center gap-1.5 border border-slate-700 transition-colors"
+          className="py-2.5 px-3.5 bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white rounded-xl text-xs font-medium flex items-center gap-1.5 border border-slate-700 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
           title="Tweak constraints or customize idea"
+          aria-label={`Refine constraints for ${blueprint.title}`}
         >
           <SlidersHorizontal className="w-3.5 h-3.5 text-indigo-400" />
           <span>Refine</span>

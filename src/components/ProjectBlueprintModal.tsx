@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { ProjectBlueprint } from "@/lib/types";
 import { generateMarkdownBlueprint } from "@/lib/export-markdown";
+import { ProjectRealityCheck } from "@/components/ProjectRealityCheck";
 import {
   X,
   Download,
@@ -19,6 +20,7 @@ import {
   ExternalLink,
   SlidersHorizontal,
   BookmarkCheck,
+  ShieldCheck,
 } from "lucide-react";
 
 interface ProjectBlueprintModalProps {
@@ -28,7 +30,13 @@ interface ProjectBlueprintModalProps {
   onOpenRefine: (blueprint: ProjectBlueprint) => void;
 }
 
-type TabType = "overview" | "architecture" | "mvp_features" | "roadmap" | "risks_future";
+type TabType =
+  | "reality_check"
+  | "overview"
+  | "architecture"
+  | "mvp_features"
+  | "roadmap"
+  | "risks_future";
 
 export function ProjectBlueprintModal({
   blueprint,
@@ -36,7 +44,7 @@ export function ProjectBlueprintModal({
   onClose,
   onOpenRefine,
 }: ProjectBlueprintModalProps) {
-  const [activeTab, setActiveTab] = useState<TabType>("overview");
+  const [activeTab, setActiveTab] = useState<TabType>("reality_check");
   const [copied, setCopied] = useState(false);
   const [completedMilestones, setCompletedMilestones] = useState<Record<string, boolean>>({});
 
@@ -72,8 +80,15 @@ export function ProjectBlueprintModal({
     Advanced: "bg-purple-950/80 text-purple-300 border-purple-800/80",
   }[blueprint.difficulty];
 
+  const evalData = blueprint.evaluation;
+
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 md:p-6 bg-slate-950/85 backdrop-blur-md animate-in fade-in duration-200">
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 md:p-6 bg-slate-950/85 backdrop-blur-md animate-in fade-in duration-200"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-blueprint-title"
+    >
       <div className="relative w-full max-w-5xl max-h-[92vh] bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl flex flex-col overflow-hidden">
         {/* Top Header */}
         <div className="px-6 py-5 border-b border-slate-800 bg-slate-950/60 flex items-start justify-between gap-4">
@@ -90,6 +105,12 @@ export function ProjectBlueprintModal({
               <span className="text-xs text-slate-400 bg-slate-800/80 px-2.5 py-0.5 rounded-full border border-slate-700">
                 Team: {blueprint.estimatedScope.teamSizeRecommendation}
               </span>
+              {evalData && (
+                <span className="text-xs font-bold text-emerald-300 bg-emerald-950/80 border border-emerald-800 px-2.5 py-0.5 rounded-full flex items-center gap-1">
+                  <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+                  Feasibility: {evalData.feasibilityScore}/100
+                </span>
+              )}
               {blueprint.aiMlComponent.included && (
                 <span className="text-xs text-cyan-300 bg-cyan-950/80 border border-cyan-800 px-2.5 py-0.5 rounded-full flex items-center gap-1">
                   <Cpu className="w-3 h-3 text-cyan-400" /> AI-Integrated
@@ -97,7 +118,10 @@ export function ProjectBlueprintModal({
               )}
             </div>
 
-            <h2 className="text-xl sm:text-2xl font-bold text-slate-100 tracking-tight truncate">
+            <h2
+              id="modal-blueprint-title"
+              className="text-xl sm:text-2xl font-bold text-slate-100 tracking-tight truncate"
+            >
               {blueprint.title}
             </h2>
             <p className="text-xs sm:text-sm text-slate-400 mt-1 line-clamp-1">
@@ -110,7 +134,8 @@ export function ProjectBlueprintModal({
             <button
               type="button"
               onClick={() => onOpenRefine(blueprint)}
-              className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-lg text-xs font-medium border border-slate-700 transition-colors"
+              className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-lg text-xs font-medium border border-slate-700 transition-colors focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:outline-none"
+              aria-label="Refine blueprint constraints"
             >
               <SlidersHorizontal className="w-3.5 h-3.5 text-indigo-400" />
               <span>Refine</span>
@@ -119,8 +144,9 @@ export function ProjectBlueprintModal({
             <button
               type="button"
               onClick={handleCopy}
-              className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-lg text-xs font-medium border border-slate-700 transition-colors"
+              className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-lg text-xs font-medium border border-slate-700 transition-colors focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:outline-none"
               title="Copy IEEE-ready Capstone Markdown"
+              aria-label="Copy markdown blueprint to clipboard"
             >
               {copied ? (
                 <>
@@ -138,8 +164,9 @@ export function ProjectBlueprintModal({
             <button
               type="button"
               onClick={handleDownload}
-              className="flex items-center gap-1.5 px-3 py-1.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg text-xs font-semibold shadow-md shadow-indigo-900/30 transition-colors"
+              className="flex items-center gap-1.5 px-3 py-1.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg text-xs font-semibold shadow-md shadow-indigo-900/30 transition-colors focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:outline-none"
               title="Download Markdown Blueprint File"
+              aria-label="Download markdown blueprint file"
             >
               <Download className="w-3.5 h-3.5" />
               <span className="hidden sm:inline">Download .md</span>
@@ -148,7 +175,8 @@ export function ProjectBlueprintModal({
             <button
               type="button"
               onClick={onClose}
-              className="p-1.5 text-slate-400 hover:text-white rounded-lg hover:bg-slate-800 transition-colors"
+              className="p-1.5 text-slate-400 hover:text-white rounded-lg hover:bg-slate-800 transition-colors focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:outline-none"
+              aria-label="Close modal"
             >
               <X className="w-5 h-5" />
             </button>
@@ -158,6 +186,7 @@ export function ProjectBlueprintModal({
         {/* Tab Navigation */}
         <div className="px-6 border-b border-slate-800 bg-slate-950/30 flex space-x-1 sm:space-x-3 overflow-x-auto scrollbar-none">
           {[
+            { id: "reality_check", label: "Reality Check & Feasibility", icon: ShieldCheck },
             { id: "overview", label: "Overview & Problem", icon: Target },
             { id: "architecture", label: "Tech & AI Architecture", icon: Cpu },
             { id: "mvp_features", label: "Features & 3-Week MVP", icon: BookmarkCheck },
@@ -171,9 +200,9 @@ export function ProjectBlueprintModal({
                 key={tab.id}
                 type="button"
                 onClick={() => setActiveTab(tab.id as TabType)}
-                className={`py-3 px-3 text-xs font-medium border-b-2 whitespace-nowrap flex items-center gap-1.5 transition-all ${
+                className={`py-3 px-3 text-xs font-medium border-b-2 whitespace-nowrap flex items-center gap-1.5 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 rounded-t-md ${
                   active
-                    ? "border-indigo-500 text-indigo-300 font-semibold"
+                    ? "border-indigo-500 text-indigo-300 font-semibold bg-indigo-950/20"
                     : "border-transparent text-slate-400 hover:text-slate-200"
                 }`}
               >
@@ -186,6 +215,17 @@ export function ProjectBlueprintModal({
 
         {/* Content Body */}
         <div className="flex-1 overflow-y-auto p-6 space-y-6 text-slate-200">
+          {/* TAB 0: REALITY CHECK */}
+          {activeTab === "reality_check" && evalData && (
+            <div className="animate-in fade-in duration-150">
+              <ProjectRealityCheck
+                evaluation={evalData}
+                projectTitle={blueprint.title}
+                isCompact={false}
+              />
+            </div>
+          )}
+
           {/* TAB 1: OVERVIEW */}
           {activeTab === "overview" && (
             <div className="space-y-6 animate-in fade-in duration-150">
@@ -198,6 +238,15 @@ export function ProjectBlueprintModal({
                   {blueprint.concept}
                 </p>
               </div>
+
+              {/* Compact Reality Check Preview */}
+              {evalData && (
+                <ProjectRealityCheck
+                  evaluation={evalData}
+                  projectTitle={blueprint.title}
+                  isCompact={true}
+                />
+              )}
 
               {/* Problem Statement */}
               <div>
@@ -498,7 +547,8 @@ export function ProjectBlueprintModal({
                               type="button"
                               key={mIdx}
                               onClick={() => toggleMilestone(key)}
-                              className="w-full text-left flex items-start gap-2.5 p-2 rounded-lg hover:bg-slate-900/80 transition-colors group"
+                              className="w-full text-left flex items-start gap-2.5 p-2 rounded-lg hover:bg-slate-900/80 transition-colors group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
+                              aria-label={`Mark milestone ${m} as ${isDone ? "incomplete" : "complete"}`}
                             >
                               <div
                                 className={`w-4 h-4 rounded mt-0.5 border flex items-center justify-center transition-colors ${
@@ -628,7 +678,7 @@ export function ProjectBlueprintModal({
           <button
             type="button"
             onClick={() => onOpenRefine(blueprint)}
-            className="text-indigo-400 hover:text-indigo-300 font-medium flex items-center gap-1"
+            className="text-indigo-400 hover:text-indigo-300 font-medium flex items-center gap-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 rounded px-1"
           >
             <SlidersHorizontal className="w-3.5 h-3.5" />
             <span>Customize or Refine Idea</span>
